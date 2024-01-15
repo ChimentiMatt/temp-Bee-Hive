@@ -20,8 +20,9 @@ Change directories into backend_app, Make sure you are on the same level as mana
 
 #### Frontend
 Open a new terminal leaving the old one running.
-Change directroies into frontend_app
-npm i
+Change directories into frontend_app and run
+`npm i`
+and then 
 `npm run dev`
 
 click on the url http://localhost:5173/ and test out the app.
