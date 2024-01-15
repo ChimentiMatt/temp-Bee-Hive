@@ -1,3 +1,8 @@
+# Bee Hive 
+is an app that allows users to practice their spelling. Using Vue3 and Django REST, this full-stack application remembers what words you missed so you can study them. You can look over your missed words or even load them into the spelling game. The core of the app is where the user hears a word from the browser's API and tries to see if they spelled it correctly. As you progress the user naturally will have a way of remembering the words they missed to improve.
+
+In the future, there will be multiple spelling lists, multiple voices to choose from, a hub with social components, and more game features such as a time attack. Try Bee Hive out. It is fun.
+
 Quick app overview video: https://drive.google.com/file/d/1JXLlgS-gM3QNkgSdh5Cqbw9RYvYbadzP/view
 
 
@@ -28,4 +33,5 @@ Password: Passabc123
 
 
 #### Please note this app is still being run in debug mode and has temporary keys
+
 
