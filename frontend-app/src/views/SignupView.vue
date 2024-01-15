@@ -2,7 +2,6 @@
     <div class="bg-primary-blue h-screen">
 
         <form class="flex flex-col items-center w-full text-white" v-on:submit.prevent="submitForm">
-
             <div class="flex flex-col items-center drop-shadow-lg">
                 <h1 class="text-[68px] lilitaFont text-primary-yellow mt-[2rem] sm:mt-[5rem] sm:text-[120px]">Bee Hive</h1>
                 <h3 class="text-white">Create your acccount</h3>
@@ -23,8 +22,8 @@
                 <RouterLink class="ml-1 text-center text-primary-green" to="/login">Login</RouterLink>
                 
             </div>
-
         </form>
+        
     </div>
 </template>
 

@@ -3,7 +3,6 @@
     
     <div class="bg-primary-green  h-screen">
         <LogoutBtn />
-
     </div>
 </template>
 

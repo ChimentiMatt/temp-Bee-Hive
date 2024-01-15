@@ -1,5 +1,4 @@
 <template>
-
     <div v-if="!userStore.user.isAuthenticated">
 
         <div class="bg-primary-blue h-screen">
@@ -15,6 +14,7 @@
             </div>
         </div> 
     </div>
+    
     <div v-else>
         <GameSettings />
     </div>

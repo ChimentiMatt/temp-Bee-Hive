@@ -29,16 +29,17 @@
                 <div class="w-[20rem] flex border-b-2 items-center mt-[2rem]">
                     <label>Voice</label>
                     <select v-model="forms.voice" class="w-full ml-[2rem]  mt-2 bg-transparent text-right pr-2">
-                        <option value="bob">Bob</option>
-                        <option value="sara">Sara</option>
+                        <option value="sara">Ignore this Field</option>
+                        <option value="bob">Coming Soon</option>
                     </select>
                 </div>
             </div>
             
             <SubmitBtn text="Game Start"/>
         </form>
+
         <div v-else> 
-            <PlayView v-model="settingsChosen" :difficulty="forms.difficulty" :numOfWords="forms.numOfWords" :forms.voice="voice" :settingsChosen="settingsChosen"/>
+            <PlayView v-model="settingsChosen" :difficulty="forms.difficulty" :numOfWords="forms.numOfWords" :settingsChosen="settingsChosen"/>
         </div>
     </div>
         
@@ -50,15 +51,26 @@ import Navbar from '@/components/Navbar.vue';
 import PlayView from './PlayView.vue';
 import LogoutBtn from '@/components/LogoutBtn.vue'
 import SubmitBtn from '@/components/SubmitBtn.vue';
-
+import { useToastStore } from '@/stores/toast';
+import axios from 'axios';
 
 export default {
+    setup() {
+        const toastStore = useToastStore();
+        
+        return {
+            toastStore,
+        };
+    },
+
     components: { 
         Input,
         SubmitBtn,
         Navbar,
         PlayView,
-        LogoutBtn
+        LogoutBtn,
+        useToastStore
+
     },
 
     data() {
@@ -75,7 +87,31 @@ export default {
 
     methods: {
         submitForm() {
-            this.settingsChosen = true
+            
+            // prevent user from using My Words when they have none in their list
+            if (this.forms.difficulty === 'myWords') {
+                this.getWords()
+            }
+            else {
+                this.settingsChosen = true;
+            }
+            
+        },
+        // api call should be moved to an earlier point and sent to store. Temporary code
+        getWords() {
+            axios
+                .get('/api/words/user_words')
+                .then(response => {
+                    if ( response.data.data.length < 1) {
+                        this.toastStore.showToast(5000, ['Unable to select My Words. No current words in list.'], 'bg-red-300');
+                    }
+                    else {
+                        this.settingsChosen = true;
+                    }
+                })
+                .catch(error => {
+                    console.log('error', error)
+                })
         }
     }
 }

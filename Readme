@@ -1,0 +1,31 @@
+Quick app overview video: https://drive.google.com/file/d/1JXLlgS-gM3QNkgSdh5Cqbw9RYvYbadzP/view
+
+
+## Run the App
+
+git clone https://github.com/ChimentiMatt/temp-Bee-Hive.git
+
+#### Backend
+For the backend start the environmental shell needs to be run. 
+At the same level as env, run 
+`.\env\Scripts\activate` 
+
+Change directories into backend_app, Make sure you are on the same level as manage.py, run `python manage.py runserver`
+
+
+#### Frontend
+Open a new terminal leaving the old one running.
+Change directroies into frontend_app
+npm i
+`npm run dev`
+
+click on the url http://localhost:5173/ and test out the app.
+
+You can make your own user or use one with pre-populated lists 
+
+Username: example@gmail.com
+Password: Passabc123
+
+
+#### Please note this app is still being run in debug mode and has temporary keys
+

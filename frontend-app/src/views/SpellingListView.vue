@@ -27,7 +27,7 @@
                     <div v-for="word in filteredItems" v-bind:key="word.id" class="text-white">
                         <p class="w-[10rem] pt-2 border-b-[1px]">{{ word.correct_spelling }}</p>
                     </div>
-                    <input @keyup.enter="addWord" ref="wordInput" type="text" class="relative w-[10rem] mt-1 outline-none">
+                    <input v-if="filteredItems.length < 17"  @keyup.enter="addWord" ref="wordInput" type="text" class="relative w-[10rem] mt-1 outline-none">
                 </div>
 
                 <div class="border-r-2 border-l-2 h-[35.1rem]"></div>
@@ -37,19 +37,18 @@
                         <p class="w-[10rem] text-start pl-1 pt-2 border-b-[1px]">{{ word.incorrect_spelling }}</p>
                         <button @click="deleteWord(word.id)" class="hover:text-red-300 ">x</button>
                     </div>
-                    <button @click="addWord" class="mt-1 relative  w-[10rem]">add word</button>
+                    <button v-if="filteredItems.length < 17" @click="addWord" class="mt-1 relative  w-[10rem]">add word</button>
                 </div>
             </div>
-
         </div>
         
     </div>
 </template>
   
 <script>
-import axios from 'axios';
 import Navbar from '@/components/Navbar.vue'
 import LogoutBtn from '@/components/LogoutBtn.vue';
+import axios from 'axios';
 
 export default {
     name: 'SpellingListVue',
@@ -84,8 +83,6 @@ export default {
             axios
                 .get('/api/words/user_words')
                 .then(response => {
-                    console.log('data', response.data)
-
                     this.words = response.data.data
                 })
                 .catch(error => {
@@ -94,11 +91,9 @@ export default {
         },
 
         deleteWord(id) {
-            console.log(id)
             axios
                 .delete(`/api/words/${id}/delete_word`)
                 .then(response => {
-                    console.log('data', response.data)
                     this.getWords()
                 })
                 .catch(error => {
@@ -132,6 +127,3 @@ export default {
     }
 }
 </script>
-
-
-

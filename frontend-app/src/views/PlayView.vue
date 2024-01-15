@@ -14,7 +14,6 @@
         </div>
 
         <div class="flex flex-col items-center mt-[2.5rem] font-bold">
-
             <p class="text-white w-[20rem]">Definition</p>
 
             <div class="h-[10rem] sm:h-[12.5rem] w-[20rem]">
@@ -40,10 +39,9 @@
                 <SubmitBtn text="Submit"/>
             </form>
             <p @click="skipWord" class="w-[5rem] ml-[15rem] text-right mt-[1rem] opacity-50 cursor-pointer">Skip Word</p>
-            
         </div>
-    </div>
 
+    </div>
   </template>
 
 <script>
@@ -71,7 +69,6 @@ export default {
     props: {
         difficulty: String,
         numOfWords: Number,
-        voice: Number,
         settingsChosen: Boolean
     },
 
@@ -89,7 +86,7 @@ export default {
     data() {
         return {
             word: 'dog',
-            definition: 'feeling or showing pleasure or contentment.',
+            definition: 'a domesticated carnivorous mammal that typically has a long snout, an acute sense of smell, nonretractable claws, and a barking, howling, or whining voice.',
             score: 0,
             points: 35,
             attempts: [],
@@ -102,6 +99,8 @@ export default {
             var msg = new SpeechSynthesisUtterance();
             msg.text = targetWord;
             window.speechSynthesis.speak(msg);
+
+            // section will be built out to have different voice variety
         
             // const voices = window.speechSynthesis.getVoices();
             // console.log(voices)
@@ -151,6 +150,7 @@ export default {
                 this.resetWord()
             }
             else if (this.attempts.length === 3) { 
+                this.toastStore.showToast(5000, [`The word "${this.word.toUpperCase()}" added to your words`], 'bg-green-300')
                 this.postMissedWord()
                 this.resetWord()
                 this.getWord()
@@ -173,10 +173,7 @@ export default {
         },
 
         drawProgress() {
-            console.log('ppppppppp')
             const pointsPerCorrect = 350 / this.numOfWords
-            console.log('f', pointsPerCorrect, this.numOfWords)
-            console.log('points', this.points)
             
             const ctx = this.$refs.canvas.getContext("2d");
             this.score % 2 === 0 ? ctx.fillStyle = "#F7F06A" : ctx.fillStyle = "black"
@@ -216,7 +213,6 @@ export default {
 
         detectIfNewWord() {
             for (let i = 0; i < this.missedWords.length; i++) {
-                console.log('for loop', this.missedWords[i].correct_spelling, this.word)
                 if (this.missedWords[i].correct_spelling === this.word) {
                     return true
                 }
@@ -230,7 +226,6 @@ export default {
                 .post('/api/words/create', { correct_spelling: this.word, incorrect_spelling: this.$refs.wordInput.value })
                 .then(response => { 
                         this.missedWords.push(this.word)
-                        this.toastStore.showToast(5000, [`The word "${this.word.toUpperCase()}" added to your words`], 'bg-green-300')
                     })
                     .catch(error => {
                         console.log('error', error)
