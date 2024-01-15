@@ -5,6 +5,7 @@ In the future, there will be multiple spelling lists, multiple voices to choose 
 
 Quick app overview video: https://drive.google.com/file/d/1JXLlgS-gM3QNkgSdh5Cqbw9RYvYbadzP/view
 
+Figma built before coding began: https://www.figma.com/file/RNyYMtJXhK7X7KWmwAknAb/Untitled?type=design&node-id=0-1&mode=design&t=tTcCqXbxosm3FzYM-0
 
 ## Run the App
 
